@@ -23,7 +23,8 @@ to each tool.
 
 1. Fork the repo and create a branch.
 2. Add `tools/<tool-slug>/index.html` (self-contained, as above).
-3. Add a card for it in the root `index.html`'s tool grid.
+3. Add a card for it in the root `index.html`'s tool grid — with the
+   `tool` class and a `data-terms` keyword list so the filter box finds it.
 4. Add an entry under **Tools** in `README.md`.
 5. Open a pull request. Please describe what the tool does and confirm it
    makes no network requests.
