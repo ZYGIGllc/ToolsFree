@@ -1,0 +1,42 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  html-validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check HTML is well-formed
+        run: |
+          shopt -s globstar
+          fail=0
+          for f in index.html tools/**/*.html; do
+            [ -f "$f" ] || continue
+            echo "Checking $f"
+            python3 - "$f" <<'EOF' || fail=1
+          import sys, html.parser
+          path = sys.argv[1]
+          html.parser.HTMLParser().feed(open(path, encoding="utf-8").read())
+          EOF
+          done
+          exit $fail
+
+      - name: No external script/tracker sources
+        run: |
+          shopt -s globstar
+          fail=0
+          for f in index.html tools/**/*.html; do
+            [ -f "$f" ] || continue
+            # Flag <script src="http...">, but allow the file's own relative/inline scripts.
+            if grep -Eo '<script[^>]+src=["'"'"']https?://[^"'"'"']+' "$f"; then
+              echo "::error file=$f::Found an external <script src> — tools must be 100% client-side."
+              fail=1
+            fi
+          done
+          exit $fail
