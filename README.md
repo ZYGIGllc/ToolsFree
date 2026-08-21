@@ -3,8 +3,10 @@
 Free, client-side browser tools from [zygig](https://zygig.com). No sign-up,
 no data collected — everything runs locally in your browser.
 
-**Live**: https://zygigllc.github.io/ToolsFree/ — a landing page (`index.html`)
-listing all available tools.
+**Live**: https://zygigllc.github.io/ToolsFree/ — the landing page
+(`index.html`) is the root page of the site: a directory of every available
+tool, with a description and link for each one. It has a client-side filter
+box, which also accepts a deep link like `?q=sharepoint`.
 
 ## Structure
 
@@ -36,7 +38,11 @@ client-side, nothing is uploaded or stored.
    same folder). Keep each tool self-contained — inline CSS/JS, no build
    step — so it can be opened directly or served as a static page.
 2. Add a card for it in the root `index.html`'s tool grid, linking to
-   `tools/<tool-slug>/`.
+   `tools/<tool-slug>/`. Give the card the `tool` class plus a `data-terms`
+   attribute of lowercase keywords so the landing page's filter box finds
+   it. The lead tool gets the wider `.feature` block instead of a card; the
+   `.soon`/`.placeholder` card is the "more coming" stub and is excluded
+   from the tool count.
 3. Link it from this README.
 4. Commit the new folder on its own.
 
