@@ -1,0 +1,3 @@
+- [Skip CI on commits](skip-ci-on-commits.md) — add [skip ci] to my commits, merge without waiting on checks
+- [GitHub Actions billing-blocked](github-actions-billing-blocked.md) — all ZYGIGllc CI fails on billing, not code
+- [Work inside the Zygig folder](work-inside-zygig-folder.md) — keep scripts, worktrees, outputs in ~/Code/Zygig/claude-workspace, not /tmp or Desktop
